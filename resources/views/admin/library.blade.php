@@ -25,7 +25,7 @@
                                     <h5 class="card-title">{{$i->quiz_title}}</h5>
                                     <p class="card-text">{{$i->quiz_description}}</p>
                                     <p class="card-text">-By {{$i->users->name}} {{$i->users->lastname}}</p>
-                                    <a href="#" class="btn btn-primary">Edit</a>
+                                    <a href="/admin/question/{{$i->quiz_title}}" class="btn btn-primary">Edit</a>
                                 </div>
                             </div>
                         </div>

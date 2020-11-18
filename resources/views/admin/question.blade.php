@@ -13,14 +13,28 @@
         @section('content')
             <form action="" method="post">
                 @csrf
-                <input type="text" placeholder="Your Question" name="question">
-                <input type="text" placeholder="First Option" name="option-I">
-                <input type="text" placeholder="Second Option" name="option-II">
-                <input type="text" placeholder="Third Option" name="option-III">
-                <input type="text" placeholder="Fourth Option" name="option-IV">
-                <input type="text" placeholder="Enter the correct answer" name="answer">
-                <button tyoe="submit" class="btn btn-success">Save</button>
-                <button type="cancel" class="btn btn-dangers">Cancel</button>
+                <div>
+                    <input type="text" placeholder="Your Question" name="question">
+                </div>
+                <div>
+                    <input type="text" placeholder="First Option" name="option-I">
+                </div>
+                <div>
+                    <input type="text" placeholder="Second Option" name="option-II">
+                </div>
+                <div>
+                    <input type="text" placeholder="Third Option" name="option-III">
+                </div>
+                <div>
+                    <input type="text" placeholder="Fourth Option" name="option-IV">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter the correct answer" name="answer">
+                </div>
+                <div>
+                    <button type="cancel" class="btn btn-dangers">Cancel</button>
+                    <button tyoe="submit" class="btn btn-success">Save</button>
+                </div>
             </form>
         @stop
     </body>

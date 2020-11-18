@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\CreateQuiz;
+use App\Http\Controllers\Users;
 use Auth;
 use Session;
 use Crypt;
@@ -72,11 +74,16 @@ class Users extends Controller
 
         //$id = Auth::user()->id;
         //print_r($id);
-        return view('admin\question');
+        return redirect()->action([Users::class,'question'],[$req->input('quiz_title')]);
     }
 
     public function library(Request $req){
         $quiz=CreateQuiz::where("user_id",Session::get('user_id'))->with('users')->get();
         return view('admin\library')->with('quiz',$quiz);
     }
+
+    public function question(Request $req,$game){
+        return view('admin\question')->with('question','');
+    }
+
 }
