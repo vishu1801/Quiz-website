@@ -47,7 +47,7 @@ class Users extends Controller
             $req->session()->put('user_id', $user[0]->id);
             return redirect('/join');
         }else{
-            $req->session()->flash('status','password is wrong');
+            $req->session()->flash('error','password is wrong');
             return redirect('/login');
         }
     }
@@ -59,6 +59,9 @@ class Users extends Controller
     }
 
     public function create_quiz(Request $req){
+        $req->validate([
+            'quiz_title'=>'required',
+        ]);
         $createquiz=new CreateQuiz;
         $createquiz->user_id=Session::get('user_id');
         $createquiz->quiz_title=$req->input('quiz_title');
@@ -78,7 +81,6 @@ class Users extends Controller
     public function read_question(Request $req,$game){
         $quiz=CreateQuiz::where("user_id",Session::get('user_id'))->where("quiz_title",$game)->get();
         $question=Question::where("quiz_id",$quiz[0]->id)->get();
-        //$save->quiz_id=$;
         return view('admin\question')->with('game',$game)->with('question',$question);
     }
 

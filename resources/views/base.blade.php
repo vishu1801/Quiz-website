@@ -6,16 +6,24 @@
 
         <title>@yield('title')</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             function delete_flash(flash){
                 $(flash).parent().remove()
             }
         </script>
+        <style>
+            .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            }
+        </style>
     </head>
     <body>
         <div>
@@ -24,6 +32,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-items"><a href="join" class="nav-link">Home</a></li>
                     @if(Session::get('user'))
+                    <li class="nav-items"><a href="" class="dropdown"><img src="/uploads/images/image.jpg" class="avatar"></a></li>
+                    <span class="caret"></span>
                     <li class="nav-items"><a href="" class="nav-link">Hi, {{Session::get('user')}}</a></li>
                     <li class="nav-items"><a href="logout" class="nav-link">Logout</a></li>
                     @else
