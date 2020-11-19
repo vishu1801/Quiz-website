@@ -27,10 +27,10 @@
                         <input type="text" placeholder="Email" name="email" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" name="password1" class="form-control">
+                        <input type="password" placeholder="Password" name="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Re-Type Password" name="password2" class="form-control">
+                        <input type="password" placeholder="Re-Type Password" name="password_confirmation" class="form-control">
                     </div>
                     <div class="form-group">
                         <select name="used" class="form-control">
@@ -39,7 +39,7 @@
                             <option Value="student">Student</option>
                         </select>
                     </div>
-                    <button type="submit">Register</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </form>
             <div>
         @stop

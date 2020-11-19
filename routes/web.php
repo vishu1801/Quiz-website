@@ -27,7 +27,9 @@ Route::group(['middleware'=>"web"], function(){
     Route::post('admin/create',[Users::class, 'create_quiz']);
     Route::view('join','join');
     Route::get('admin/library',[Users::class, 'library']);
-    Route::get('admin/question/{game}',[Users::class, 'question']);
+    Route::get('admin/question/{game}',[Users::class, 'read_question']);
+    Route::post('admin/question/{game}',[Users::class, 'save_question']);
+
 });
 Route::get('logout',[Users::class,'logout']);
 

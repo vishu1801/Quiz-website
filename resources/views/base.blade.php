@@ -37,8 +37,10 @@
             </nav>
         </div>
         <div>
-            @if(Session::has('status'))
-                <p class="alert alert-info">{{ Session::get('status') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+                @endforeach
             @endif
             @yield('content')
         </div>

@@ -30,6 +30,11 @@
             </nav>
         </div>
         <div>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+                @endforeach
+            @endif
             @yield('content')
         </div>
     </body>
