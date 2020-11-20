@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\CreateQuiz;
 use App\Http\Controllers\Users;
+use DB;
 use Auth;
 use Session;
 use Crypt;
@@ -104,4 +105,44 @@ class Users extends Controller
         return redirect()->action([Users::class,'read_question'],[$game]);
     }
 
+    public function profile(Request $req){
+        $user=User::where("id",Session::get('user_id'))->get();
+        return view('profile')->with('user',$user); 
+    }
+
+    public function update(Request $req){
+        $req->validate([
+            'firstname'=>'required|max:255',
+            'lastname'=>'required|max:255',
+            'email'=>'required|email|max:255',
+        ]);
+        $update=User::where('id',Session::get('user_id'))->update(['name'=>$req->input('firstname'),
+                                                                'lastname'=>$req->input('lastname'),
+                                                                'email'=>$req->input('email')]);
+        return redirect('profile');
+    }
+
+    public function question_edit(Request $req, $game, $ques_id ){
+        $ques= Question::where('id',$ques_id)->get();
+        return view('admin\edit_question')->with('ques',$ques);
+    }
+
+    public function question_update(Request $req,$game,$ques_id){
+        $req->validate([
+            'question'=>'required|max:255',
+            'answer'=>'required|max:255'
+        ]);
+        $ques=Question::where('id',$ques_id)->update(['question'=>$req->input('question'),
+                                        'option_I'=>$req->input('option_I'),
+                                        'option_II'=>$req->input('option_II'),
+                                        'option_III'=>$req->input('option_III'),
+                                        'option_IV'=>$req->input('option_IV'),
+                                        'answer'=>$req->input('answer')]);
+        return redirect()->action([Users::class,'read_question'],[$game]);
+    }
+
+    public function question_delete(Request $req,$game,$ques_id){
+        $ques=Question::where('id',$ques_id)->delete();
+        return redirect()->action([Users::class,'read_question'],[$game]);
+    }
 }

@@ -15,16 +15,30 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
         <script>
             function delete_flash(flash){
                 $(flash).parent().remove()
             }
         </script>
         <style>
+            .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            }
             .avatar {
             vertical-align: middle;
             width: 30px;
             height: 30px;
+            border-radius: 50%;
+            }
+            .avatar1 {
+            vertical-align: middle;
+            width: 100px;
+            height: 140px;
             border-radius: 50%;
             }
         </style>
@@ -39,9 +53,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/uploads/images/image.jpg" class="avatar"></a>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
-                            <li><a class="dropdown-item" href="#">Hi, {{Session::get('user')}}</a></li>
+                            <li><a class="dropdown-item" href="profile">Hi, {{Session::get('user')}}</a></li>
                             <hr>
-                            <li><a class="dropdown-item" href="#">Your Profile</a></li>
+                            <li><a class="dropdown-item" href="profile">Your Profile</a></li>
                             <hr>
                             @if(Session::get('used')=="teacher")
                             <li><a class="dropdown-item" href="admin">Instructor Dashboard</a></li>
