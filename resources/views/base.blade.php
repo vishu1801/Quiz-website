@@ -6,11 +6,15 @@
 
         <title>@yield('title')</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/4.5.3/dist/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap/4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js/1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap/4.5.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
         <script>
             function delete_flash(flash){
                 $(flash).parent().remove()
@@ -19,8 +23,8 @@
         <style>
             .avatar {
             vertical-align: middle;
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             }
         </style>
@@ -32,20 +36,27 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-items"><a href="join" class="nav-link">Home</a></li>
                     @if(Session::get('user'))
-                    <li class="nav-items"><a href="" class="dropdown"><img src="/uploads/images/image.jpg" class="avatar"></a></li>
-                    <span class="caret"></span>
-                    <li class="nav-items"><a href="" class="nav-link">Hi, {{Session::get('user')}}</a></li>
-                    <li class="nav-items"><a href="logout" class="nav-link">Logout</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/uploads/images/image.jpg" class="avatar"></a>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
+                            <li><a class="dropdown-item" href="#">Hi, {{Session::get('user')}}</a></li>
+                            <hr>
+                            <li><a class="dropdown-item" href="#">Your Profile</a></li>
+                            <hr>
+                            @if(Session::get('used')=="teacher")
+                            <li><a class="dropdown-item" href="admin">Instructor Dashboard</a></li>
+                            <hr>
+                            @endif
+                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                        </ul>
+                    </li>
                     @else
                     <li class="nav-items"><a href="login" class="nav-link">Login</a></li>
                     <li class="nav-items"><a href="register" class="nav-link">Register</a></li>
                     @endif
-                    @if(Session::get('used')=="teacher")
-                    <li class="nav-items"><a href="admin" class="nav-link">Instructor Dashboard</a></li>
-                    @endif
                 </ul>
             </nav>
-        </div>
+        </div>    
         <div>
             @if ($errors->any())
                 @foreach ($errors->all() as $error)

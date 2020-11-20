@@ -44,6 +44,7 @@ class Users extends Controller
         {
             $req->session()->put('user', $user[0]->name);
             $req->session()->put('used', $user[0]->used_as);
+            $req->session()->put('user_email', $user[0]->email);
             $req->session()->put('user_id', $user[0]->id);
             return redirect('/join');
         }else{
