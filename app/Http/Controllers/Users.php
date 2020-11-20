@@ -49,7 +49,7 @@ class Users extends Controller
             $req->session()->put('user_id', $user[0]->id);
             return redirect('/join');
         }else{
-            $req->session()->flash('error','password is wrong');
+            $req->session()->flash('status','The given password is wrong');
             return redirect('/login');
         }
     }
@@ -62,13 +62,20 @@ class Users extends Controller
 
     public function create_quiz(Request $req){
         $req->validate([
-            'quiz_title'=>'required|exists:createquiz,quiz_title',
+            'quiz_title'=>'required',
         ]);
-        $createquiz=new CreateQuiz;
-        $createquiz->user_id=Session::get('user_id');
-        $createquiz->quiz_title=$req->input('quiz_title');
-        $createquiz->quiz_description=$req->input('quiz_description');
-        $createquiz->save();
+        $quiz=CreateQuiz::where('user_id',Session::get('user_id'))->where('quiz_title',$req->input('quiz_title'))->get();
+        if(empty($quiz)){
+
+            $createquiz=new CreateQuiz;
+            $createquiz->user_id=Session::get('user_id');
+            $createquiz->quiz_title=$req->input('quiz_title');
+            $createquiz->quiz_description=$req->input('quiz_description');
+            $createquiz->save();
+        }else{
+            $req->session()->flash('status','You have already taken the same quiz title.');
+            return redirect('/admin/create');
+        }
 
         //$id = Auth::user()->id;
         //print_r($id);

@@ -35,6 +35,9 @@
                     <p class="alert alert-danger">{{ $error }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
                 @endforeach
             @endif
+            @if (Session::get('status'))
+                <p class="alert alert-danger">{{ Session::get('status') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+            @endif
             @yield('content')
         </div>
     </body>
