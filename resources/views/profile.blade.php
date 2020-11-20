@@ -12,27 +12,26 @@
                 </div>
             </div>
             <div>
-                <form action="update" method="post">
+                <form class="col-6 ml-auto mr-auto" action="update" method="post">
                     @csrf
-                    <div class="form-group col-6 ml-auto mr-auto">
+                    <div class="form-group">
                         <label>Firstname:</label>
                         <input type="text" value="{{Session::get('user')}}" class="form-control" name="firstname">
                     </div>
-                    <div class="form-group col-6 ml-auto mr-auto">
+                    <div class="form-group">
                         <label>Lastname:</label>
                         <input type="text" value="{{$user[0]->lastname}}" class="form-control" name="lastname">
                     </div>
-                    <div class="form-group col-6 ml-auto mr-auto">
+                    <div class="form-group">
                         <label>Email:</label>
                         <input type="text" value="{{Session::get('user_email')}}" class="form-control" name="email">
                     </div>
-                    <div class="form-group col-6 ml-auto mr-auto">
+                    <div class="form-group">
                         <label>Account Type:</label>
                         <input type="text" disabled value="{{$user[0]->used_as}}" class="form-control">
                     </div>
-                    <div class="form-group col-6 ml-auto mr-auto">
-                        <button type="button" class="btn">Cancel</button>
-                        <button type="submit" class="btn btn-success">Update</button>
+                    <div>
+                        <button type="submit" class="btn btn-success form-control col-3">Update</button>
                     </div>
                 </form>
             </div>

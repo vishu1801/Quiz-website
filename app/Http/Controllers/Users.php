@@ -62,7 +62,7 @@ class Users extends Controller
 
     public function create_quiz(Request $req){
         $req->validate([
-            'quiz_title'=>'required',
+            'quiz_title'=>'required|exists:createquiz,quiz_title',
         ]);
         $createquiz=new CreateQuiz;
         $createquiz->user_id=Session::get('user_id');

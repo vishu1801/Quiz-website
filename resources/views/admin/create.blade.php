@@ -12,22 +12,22 @@
     </head>
     <body>
         @section('content')
-            <h1>Create a new quiz</h1>
-            <form action="/admin/create" method="post" entype="multipart/form-data">
+            <h1 style="text-align: center">Create a new quiz</h1>
+            <form class="ml-auto mr-auto col-6"action="/admin/create" method="post" entype="multipart/form-data">
                 @csrf
-                <div>
+                <div class="form-group">
                     <label>Name Of The Quiz</label>
-                    <input type="text" name="quiz_title">
+                    <input type="text" name="quiz_title" class="form-control">
                 </div>
-                <div>
+                <div class="form-group">
                     <label>Description (optional)</label>
-                    <input type="text" name="quiz_description">
+                    <input type="text" name="quiz_description" class="form-control">
                 </div>
-                <div>
+                <div class="form-group">
                     <label>Image of Quiz (optional)</label>
-                    <input type="file" name="quiz_image">
+                    <input type="file" name="quiz_image" class="form-control">
                 </div>
-                <button type="submit">Next</button>
+                <button type="submit" class="btn btn-primary form-control">Next</button>
             </form>
         @stop
     </body>
