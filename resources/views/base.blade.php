@@ -48,20 +48,22 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a href="" class="navbar-brand">online quiz</a>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-items"><a href="join" class="nav-link">Home</a></li>
                     @if(Session::get('user'))
+                    <li class="nav-items"><a href="join" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/uploads/images/image.jpg" class="avatar"></a>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
                             <li><a class="dropdown-item" href="profile">Hi, {{Session::get('user')}}</a></li>
                             <hr>
-                            <li><a class="dropdown-item" href="profile">Your Profile</a></li>
+                            <li><a class="dropdown-item" href="profile"><i class="fa fa-user-circle" aria-hidden="true"></i>  Your Profile</a></li>
                             <hr>
                             @if(Session::get('used')=="teacher")
-                            <li><a class="dropdown-item" href="admin">Instructor Dashboard</a></li>
+                            <li><a class="dropdown-item" href="admin"><i class="fa fa-dashcube" aria-hidden="true"></i>  Instructor Dashboard</a></li>
                             <hr>
                             @endif
-                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i>  Change Password</a></li>
+                            <hr>
+                            <li><a class="dropdown-item" href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
                         </ul>
                     </li>
                     @else

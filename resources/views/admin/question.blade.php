@@ -34,7 +34,7 @@
                     <div class="container px-1">
                         <div class="panel panel-default" style="border-style:solid">
                             <div class="panel-heading" style="background-color:	#DCDCDC" >Question {{$loop->iteration}} 
-                                <a href="{{$game}}/{{$quiz->id}}" style="color: #000000" class="float-right px-2"><i class="fa fa-pencil" style="font-size:25px"></i></a>
+                                <a href="{{$game}}/{{$quiz->id}}" style="color: #000000" class="float-right px-2"><i class="fa fa-pencil-square-o" style="font-size:25px"></i></a>
                                 <a href="delete/{{$game}}/{{$quiz->id}}" style="color: #000000" class="float-right"><i class="fa fa-trash-o" style="font-size:25px"></i></a>
                             </div>
                             <div class="panel-body">{{$quiz->question}}</div>

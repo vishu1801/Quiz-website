@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\Question;
 use App\Models\CreateQuiz;
+use App\Models\Live;
 use App\Http\Controllers\Users;
 use DB;
 use Auth;
@@ -151,5 +152,18 @@ class Users extends Controller
     public function question_delete(Request $req,$game,$ques_id){
         $ques=Question::where('id',$ques_id)->delete();
         return redirect()->action([Users::class,'read_question'],[$game]);
+    }
+
+    public function playlive(Request $req,$game){
+        $random=rand(10000,99999);
+        $create=CreateQuiz::where('quiz_title',$game)->where('user_id',Session::get('user_id'))->update(['code'=>$random,
+                                                                                                        'counter'=>0]);
+        return redirect('live/'. $game . '/'. $random);
+    }
+
+    public function live(Request $req,$game,$code){
+        $quiz_id=CreateQuiz::where('quiz_title',$game)->where('user_id',Session::get('user_id'))->get();
+        $live=Live::where('quiz_id',$quiz_id[0]->id)->with('createquiz')->with('users')->get();
+        return view('admin\live')->with(['game'=>$game,'code'=>$code, 'live'=>$live]);
     }
 }

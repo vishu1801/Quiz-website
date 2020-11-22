@@ -34,6 +34,8 @@ Route::group(['middleware'=>"web"], function(){
     Route::post('admin/question/{game}',[Users::class, 'save_question']);
     Route::get('profile',[Users::class, 'profile']);
     Route::post('update',[Users::class, 'update']);
+    Route::get('playlive/{game}', [Users::class, 'playlive']);
+    Route::get('live/{game}/{code}',[Users::class,'live']);
 
 });
 Route::get('logout',[Users::class,'logout']);

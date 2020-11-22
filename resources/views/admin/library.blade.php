@@ -20,6 +20,7 @@
                                     <p class="card-text">{{$i->quiz_description}}</p>
                                     <p class="card-text">-By {{$i->users->name}} {{$i->users->lastname}}</p>
                                     <a href="/admin/question/{{$i->quiz_title}}" class="btn btn-primary">Edit</a>
+                                    <a href="/playlive/{{$i->quiz_title}}" class="btn" style="background: #800080; color:#FFFFFF"><i class="fa fa-play" aria-hidden="true"></i>   Play Live</a>
                                 </div>
                             </div>
                         </div>
