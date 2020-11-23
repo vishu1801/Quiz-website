@@ -134,6 +134,21 @@ class Users extends Controller
             'lastname'=>'required|max:255',
             'email'=>'required|email|max:255',
         ]);
+        if($req->hasFile('image')){
+            $req->validate([
+                'image'=>'mimes:jpeg,jpg,png|required|max:5000',
+            ]);
+            $filename=$req->image->getClientOriginalName();
+            $seperate=explode('.',$filename);
+            $modified_filename=$seperate[0] . time() . '.' . $seperate[1];
+            $req->image->storeAs('images',$modified_filename,'public');
+            $update=User::where('id',Auth::user()->id)->update(['name'=>$req->input('firstname'),
+                                                                'lastname'=>$req->input('lastname'),
+                                                                'email'=>$req->input('email'),
+                                                                'image_url'=>$modified_filename]);
+            return redirect()->back();
+
+        }
         $update=User::where('id',Auth::user()->id)->update(['name'=>$req->input('firstname'),
                                                                 'lastname'=>$req->input('lastname'),
                                                                 'email'=>$req->input('email')]);
