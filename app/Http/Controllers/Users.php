@@ -146,13 +146,12 @@ class Users extends Controller
                                                                 'lastname'=>$req->input('lastname'),
                                                                 'email'=>$req->input('email'),
                                                                 'image_url'=>$modified_filename]);
-            return redirect()->back();
-
-        }
-        $update=User::where('id',Auth::user()->id)->update(['name'=>$req->input('firstname'),
+        }else{
+            $update=User::where('id',Auth::user()->id)->update(['name'=>$req->input('firstname'),
                                                                 'lastname'=>$req->input('lastname'),
                                                                 'email'=>$req->input('email')]);
-        return redirect('profile');
+        }
+        return redirect()->back();
     }
 
     public function question_edit(Request $req, $game, $ques_id ){
