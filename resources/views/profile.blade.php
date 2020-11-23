@@ -10,7 +10,7 @@
                     @if(Auth::user()->image_url != "")
                         <img src="/storage/uploads/images/images/{{Auth::user()->image_url}}" class="avatar1 center py-3" class="">
                     @else
-                        <img src="/storage/uploads/images/images/123.jpg" class="avatar1 center py-3" class="">
+                        <img src="/storage/uploads/images/images/default.png" class="avatar1 center py-3" class="">
                     @endif
                     <p style="text-align: center;" class="py-1">Welcome, {{Auth::user()->email}}</p>
                 </div>

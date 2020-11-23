@@ -93,7 +93,7 @@
                         @if(Auth::user()->image_url !="")
                             <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/storage/uploads/images/images/{{Auth::user()->image_url}}" class="avatar"></a>
                         @else
-                            <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/storage/uploads/images/images/123.jpg" class="avatar"></a>
+                            <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/storage/uploads/images/images/default.png" class="avatar"></a>
                         @endif
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
                             <li><a class="dropdown-item" href="profile">Hi, {{Auth::user()->name}}</a></li>
