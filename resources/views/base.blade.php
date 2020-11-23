@@ -16,11 +16,37 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="resources/js/password_text.js"></script>
         
         <script>
             function delete_flash(flash){
                 $(flash).parent().remove()
             }
+            function mouseoverPass_old(obj) {
+                var obj = document.getElementById('oldPassword');
+                obj.type = "text";
+            }
+            function mouseoverPass_new(obj) {
+                var obj = document.getElementById('newPassword');
+                obj.type = "text";
+            }
+            function mouseoverPass_confirm(obj) {
+                var obj = document.getElementById('confirmPassword');
+                obj.type = "text";
+            }
+            function mouseoutPass_old(obj) {
+                var obj = document.getElementById('oldPassword');
+                obj.type = "password";
+            }
+            function mouseoutPass_new(obj) {
+                var obj = document.getElementById('newPassword');
+                obj.type = "password";
+            }
+            function mouseoutPass_confirm(obj) {
+                var obj = document.getElementById('confirmPassword');
+                obj.type = "password";
+            }
+            
         </script>
         <style>
             .center {
@@ -41,6 +67,19 @@
             height: 140px;
             border-radius: 50%;
             }
+            .right-inner-addon {
+                position: relative;
+            }
+
+            .right-inner-addon input {
+                padding-right: 30px;
+            }
+
+            .right-inner-addon i {
+                position: absolute;
+                right: 0px;
+                padding: 40px 12px;
+            }
         </style>
     </head>
     <body>
@@ -48,20 +87,20 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a href="" class="navbar-brand">online quiz</a>
                 <ul class="navbar-nav ml-auto">
-                    @if(Session::get('user'))
+                    @if(Auth::check())
                     <li class="nav-items"><a href="join" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/uploads/images/image.jpg" class="avatar"></a>
+                        <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"><img src="/storage/uploads/images/images/123.jpg" class="avatar"></a>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
-                            <li><a class="dropdown-item" href="profile">Hi, {{Session::get('user')}}</a></li>
+                            <li><a class="dropdown-item" href="profile">Hi, {{Auth::user()->name}}</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="profile"><i class="fa fa-user-circle" aria-hidden="true"></i>  Your Profile</a></li>
                             <hr>
-                            @if(Session::get('used')=="teacher")
+                            @if(Auth::user()->used_as=="teacher")
                             <li><a class="dropdown-item" href="admin"><i class="fa fa-dashcube" aria-hidden="true"></i>  Instructor Dashboard</a></li>
                             <hr>
                             @endif
-                            <li><a class="dropdown-item" href="#"><i class="fa fa-key" aria-hidden="true"></i>  Change Password</a></li>
+                            <li><a class="dropdown-item" href="change_password"><i class="fa fa-key" aria-hidden="true"></i>  Change Password</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
                         </ul>
@@ -80,7 +119,10 @@
                 @endforeach
             @endif
             @if (Session::get('status'))
-                <p class="alert alert-danger">{{ Session::get('status') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+                <p class="alert alert-success">{{ Session::get('status') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+            @endif
+            @if (Session::get('danger'))
+                <p class="alert alert-danger">{{ Session::get('danger') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
             @endif
             @yield('content')
         </div>

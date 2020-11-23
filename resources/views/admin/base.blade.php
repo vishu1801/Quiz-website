@@ -38,6 +38,9 @@
             @if (Session::get('status'))
                 <p class="alert alert-danger">{{ Session::get('status') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
             @endif
+            @if (Session::get('danger'))
+                <p class="alert alert-danger">{{ Session::get('danger') }}<button class="close" onclick="delete_flash(this);">&times;</button></p>
+            @endif
             @yield('content')
         </div>
     </body>

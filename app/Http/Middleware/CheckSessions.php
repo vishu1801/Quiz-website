@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth; 
 
-class CustomAuth
+class CheckSessions
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,8 @@ class CustomAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(($request->path()=="login" || $request->path()=="register") && Auth::check()){
-            $request->session()->flash('status','You are already Authenticated');
+        if(!Auth::check()){
+            $request->session()->flash('danger','Please Authenticate yourself first.');
             return redirect("/");
         }
         return $next($request);

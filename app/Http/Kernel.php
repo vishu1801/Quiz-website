@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
     ];
 
     /**
@@ -29,6 +30,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewareGroups = [
+        'authenticate' => [
+            \App\Http\Middleware\CheckSessions::class,
+        ],
+        'admin' => [
+            \App\Http\Middleware\Access::class,
+        ],
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,

@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use Session;
 
-class CustomAuth
+class Access
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,9 @@ class CustomAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(($request->path()=="login" || $request->path()=="register") && Auth::check()){
-            $request->session()->flash('status','You are already Authenticated');
-            return redirect("/");
+        if(Session::get('used')!="teacher"){
+            $request->session()->flash('danger','You dont have the access of that page or link');
+            return redirect('/');
         }
         return $next($request);
     }

@@ -14,8 +14,8 @@ class CreateQuiz extends Model
     protected $fillable = [
         'user_id',
         'quiz_title',
-        'quiz_image'=>'nullable',
-        'quiz_description'=>'nullable',
+        'quiz_image',
+        'quiz_description',
     ];
 
     public function users()

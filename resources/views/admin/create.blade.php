@@ -6,7 +6,7 @@
     <body>
         @section('content')
             <h1 style="text-align: center">Create a new quiz</h1>
-            <form class="ml-auto mr-auto col-6"action="/admin/create" method="post" entype="multipart/form-data">
+            <form class="ml-auto mr-auto col-6" action="/admin/create" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label>Name Of The Quiz</label>
