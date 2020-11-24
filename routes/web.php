@@ -33,7 +33,7 @@ Route::group(['middleware'=>'authenticate'],function(){
     Route::post('password_update',[Users::class,'password_update']);
 });
 
-Route::group(['middleware' => 'admin','middleware' => 'authenticate'],function(){
+Route::group(['middleware' => ['admin','authenticate']],function(){
     Route::view('admin','admin\create');
     Route::view('admin/create','admin\create');
     Route::post('admin/create',[Users::class, 'create_quiz']);
