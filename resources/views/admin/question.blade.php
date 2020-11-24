@@ -5,7 +5,7 @@
     </head>
     <body>
         @section('content')
-            <form class="col-5 ml-auto mr-auto" action="/admin/question/{{$game}}" method="post">
+            <form class="col-sm-12 col-md-5 ml-auto mr-auto" action="/admin/question/{{$game}}" method="post">
                 @csrf
                 <div class="form-group">
                     <input type="text" placeholder="Your Question" name="question" class="form-control">

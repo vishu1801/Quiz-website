@@ -5,7 +5,7 @@
     </head>
     <body>
         @section('content')
-            <form class="col-6 mr-auto ml-auto" action="{{$ques[0]->id}}" method="post">
+            <form class="col-sm-12 col-md-6 mr-auto ml-auto" action="{{$ques[0]->id}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label>Question:</label>
