@@ -26,6 +26,9 @@ Route::group(['middleware'=>"web"], function(){
 
 Route::group(['middleware'=>'authenticate'],function(){
     Route::view('join','join');
+    Route::get('joingame',[Users::class,'join_game']);
+    Route::get('student_exit/{user_id}',[Users::class,'student_exit']);
+    Route::get('student_live/{quiz_id}',[Users::class, 'student_joined']);
     Route::view('profile','profile');
     Route::post('update',[Users::class, 'update']);
     Route::get('logout',[Users::class,'logout']);
@@ -45,6 +48,8 @@ Route::group(['middleware' => ['admin','authenticate']],function(){
     Route::post('admin/question/{game}',[Users::class, 'save_question']);
     Route::get('playlive/{game}', [Users::class, 'playlive']);
     Route::get('live/{game}/{code}',[Users::class,'live']);
+    Route::get('teacher_end/{game}',[Users::class, 'teacher_end']);
+    Route::get('teacher_start/{game}',[Users::class, 'teacher_start']);
 
 });
 

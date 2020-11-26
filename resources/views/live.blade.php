@@ -26,27 +26,35 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a href="" class="navbar-brand">Online Quiz</a>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-items"><a href="/teacher_end/{{$game}}" class="nav-link" style="font-size: 20px;">End Game</a></li>
                     <li class="nav-items"><button class="nav-link btn btn-primary" style="font-size: 20px;"> 🎀  {{$code}}  🎀</button></li>
+                    <li class="nav-items"><a href="/student_exit/{{Auth::user()->id}}" class=" mx-2 nav-link btn btn-primary" style="font-size: 20px;"> Exit</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="box border-6 rounded ml-auto mr-auto my-4 ">
-            <p class="text-center text-light" style="font-size:30px;">Join the Game:</p>
-            <p class="text-center text-light" style="font-size:30px;">{{$game}}</p>
-            <p class="bg-light text-center rounded m-4 " style="font-size:30px;">{{$code}}</p>
-            <a href="/teacher_start/{{$game}}" class="mr-auto btn btn-success rounded btn-hover" style="font-size:40px; margin-left:80px;">START</a>
-        </div>
+        @foreach ($members as $students)
+            @if (Auth::user()->id == $students->user_id)
+                <div class="box border-6 rounded ml-auto mr-auto my-4 ">
+                    <p class="text-center text-light" style="font-size:30px;">Join the Game:</p>
+                    <p class="text-center text-light" style="font-size:30px;">{{$game}}</p>
+                    <p class="bg-light text-center rounded m-4 " style="font-size:30px;">{{$code}}</p>
+                    <p class="text-center rounded m-4 " style="font-size:30px; text-transform:capitalize">{{$students->users->name}} {{$students->users->lastname}}</p>
+                </div>
+            @endif
+        @endforeach
+        <p class="ml-auto mr-auto" style="font-size:25px;">You are playing with {{count($members)-1}} others.</p>
         <div class="container my-5">
             <div class="row">
-                @foreach ($live as $students)
-                    <div class="col-sm-6 col-md-3 my-2">
-                        <div class="box rounded" style="width: 250px; height: 70px;">
-                           <p class="m-2" style="font-size:25px; text-transform:capitalize;">{{$students->users->name}} {{$students->users->lastname}}</p>
+                @foreach ($members as $students)
+                    @if (Auth::user()->id != $students->user_id)
+                        <div class="col-sm-6 col-md-3 my-2">
+                            <div class="box rounded" style="width: 250px; height: 70px;">
+                                <p class="m-2" style="font-size:25px; text-transform:capitalize;">{{$students->users->name}} {{$students->users->lastname}}</p>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
+        
     </body>
 </html>

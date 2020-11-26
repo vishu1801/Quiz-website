@@ -26,12 +26,12 @@
     </head>
     <body>
         @section('content')
-            <form action="" class="col-sm-12 col-md-6 ml-auto mr-auto">
+            <form action="joingame" class="col-sm-12 col-md-6 ml-auto mr-auto">
                 <div class="form-group input-icons">
                     <i class="fa fa-ticket icon" aria-hidden="true"></i>
-                    <input type="text" placeholder="Enter the code" class="form-control input-field">
+                    <input type="text" placeholder="Enter the code" name="code" class="form-control input-field">
                 </div>
-                <button type="submit" class="btn btn-success form-control col-4">Enter</button>
+                <button type="submit" class="btn btn-success form-control col-sm-6 col-md-4">Enter</button>
             </form>
         @stop
     </body>

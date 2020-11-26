@@ -47,7 +47,7 @@ class Users extends Controller
         {
             $credentials=$req->only('email','password');
             if(Auth::attempt($credentials)){
-                return view('join');
+                return redirect('/join');
             }else{
                 $req->session()->flash('status','Some internet issues. Please login again.');
                 return redirect('/login');
@@ -209,8 +209,58 @@ class Users extends Controller
 
     }
 
-    public function student_join(Request $req){
-        
+    public function join_game(Request $req){
+        $req->validate([
+            'code'=>'required',
+        ]);
+        $code=$req->input('code');
+        $exist=CreateQuiz::where('code',$code)->get();
+        $already=Live::where('user_id',Auth::user()->id)->where('quiz_id',$exist[0]->id)->get();
+        if($already->isEmpty()){
+            if(!$exist->isEmpty()){
+                if($exist[0]->counter==0){
+                    $live=new Live();
+                    $live->quiz_id=$exist[0]->id;
+                    $live->user_id=Auth::user()->id;
+                    $live->save();
+                    return redirect('/student_live/' . $exist[0]->id);
+                    // $members=Live::where('quiz_id',$exist[0]->id)->with('createquiz')->with('users')->get();
+                    // return view('live')->with(['members'=>$members,'code'=>$code, 'game'=>$exist[0]->quiz_title]);
+                }else if($exist[0]->counter==1){
+                    $questions = Question::where('quiz_id',$exist[0]->id)->paginate(1);
+                    return view('playing')->with('questions',$questions);
+                }else{
+                    $req->session()->flash('danger','Please enter the valid code');
+                    return redirect()->back();
+                }
+            }else{
+                $req->session()->flash('danger','Please enter the valid code');
+                return redirect()->back();
+            }
+        }else{
+            $req->session()->flash('status','You have already joined');
+            return redirect()->back();
+        }
     }
+
+    public function student_exit(Request $req, $user_id){
+        Live::where('user_id',$user_id)->delete();
+        return redirect('/join');
+    }
+
+    public function teacher_end(Request $req, $game){
+        CreateQuiz::where('user_id',Auth::user()->id)->where('quiz_title',$game)->update(['counter'=>2]);
+        return redirect('admin/library');
+    }
+
+    public function student_joined(Request $req, $quiz_id){
+        $members=Live::where('quiz_id',$quiz_id)->with('createquiz')->with('users')->get();
+        return view('live')->with(['members'=>$members,'code'=>$members[0]->createquiz->code, 'game'=>$members[0]->createquiz->quiz_title]);
+    }
+
+    // public function teacher_start(Request $req, $game){
+    //     CreateQuiz::where('user_id',Auth::user()->id)->where('quiz_title',$game)->update(['counter'=>1]);
+
+    // }
 
 }

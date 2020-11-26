@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                     @foreach($quiz as $i)
-                        <div class="col-sm-6 col-md-4">
+                        <div class="my-3 col-sm-12 col-md-4">
                             <div class="card" style="width: 18rem;">
                                 @if($i->quiz_image=="")
                                     <img class="card-img-top" src="/storage/uploads/images/images/123.jpg" height="150" width="150" alt="Card image cap">
