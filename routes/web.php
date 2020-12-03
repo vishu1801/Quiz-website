@@ -50,6 +50,7 @@ Route::group(['middleware' => ['admin','authenticate']],function(){
     Route::get('live/{game}/{code}',[Users::class,'live']);
     Route::get('teacher_end/{game}',[Users::class, 'teacher_end']);
     Route::get('teacher_start/{game}',[Users::class, 'teacher_start']);
+    Route::get('performance/{game}',[Users::class,'performance']);
 
 });
 

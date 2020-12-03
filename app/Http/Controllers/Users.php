@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\Question;
 use App\Models\CreateQuiz;
-use App\Models\Live;
+use App\Models\Record;
 use App\Http\Controllers\Users;
 use DB;
 use Auth;
@@ -187,7 +187,7 @@ class Users extends Controller
 
     public function live(Request $req,$game,$code){
         $quiz_id=CreateQuiz::where('quiz_title',$game)->where('user_id',Auth::user()->id)->get();
-        $live=Live::where('quiz_id',$quiz_id[0]->id)->with('createquiz')->with('users')->get();
+        $live=Record::where('quiz_id',$quiz_id[0]->id)->with('createquiz')->with('users')->get();
         return view('admin\live')->with(['game'=>$game,'code'=>$code, 'live'=>$live]);
     }
 
@@ -215,11 +215,11 @@ class Users extends Controller
         ]);
         $code=$req->input('code');
         $exist=CreateQuiz::where('code',$code)->get();
-        $already=Live::where('user_id',Auth::user()->id)->where('quiz_id',$exist[0]->id)->get();
+        $already=Record::where('user_id',Auth::user()->id)->where('quiz_id',$exist[0]->id)->get();
         if($already->isEmpty()){
             if(!$exist->isEmpty()){
                 if($exist[0]->counter==0){
-                    $live=new Live();
+                    $live=new Record();
                     $live->quiz_id=$exist[0]->id;
                     $live->user_id=Auth::user()->id;
                     $live->save();
@@ -244,7 +244,7 @@ class Users extends Controller
     }
 
     public function student_exit(Request $req, $user_id){
-        Live::where('user_id',$user_id)->delete();
+        Record::where('user_id',$user_id)->delete();
         return redirect('/join');
     }
 
@@ -254,13 +254,19 @@ class Users extends Controller
     }
 
     public function student_joined(Request $req, $quiz_id){
-        $members=Live::where('quiz_id',$quiz_id)->with('createquiz')->with('users')->get();
+        $members=Record::where('quiz_id',$quiz_id)->with('createquiz')->with('users')->get();
         return view('live')->with(['members'=>$members,'code'=>$members[0]->createquiz->code, 'game'=>$members[0]->createquiz->quiz_title]);
     }
 
-    // public function teacher_start(Request $req, $game){
-    //     CreateQuiz::where('user_id',Auth::user()->id)->where('quiz_title',$game)->update(['counter'=>1]);
+    public function teacher_start(Request $req, $game){
+        CreateQuiz::where('user_id',Auth::user()->id)->where('quiz_title',$game)->update(['counter'=>1]);
+        return redirect('/performance/' . $game);
+    }
 
-    // }
+    public function performane(Request $req,$game){
+        $details=CreateQuiz::where('user_id',Auth::user()->id)->where('quiz_title',$game)->get();
+        $record=Record::where('quiz_id',$details[0]->id)->with('users')->get();
+        return view('performance')->with('');
+    }
 
 }
