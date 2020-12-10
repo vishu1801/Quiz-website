@@ -263,10 +263,10 @@ class Users extends Controller
         return redirect('/performance/' . $game);
     }
 
-    public function performane(Request $req,$game){
+    public function performance(Request $req,$game){
         $details=CreateQuiz::where('user_id',Auth::user()->id)->where('quiz_title',$game)->get();
         $record=Record::where('quiz_id',$details[0]->id)->with('users')->get();
-        return view('performance')->with('');
+        return view('admin\performance')->with(['live'=>$record, 'code'=>$details[0]->code, 'game'=>$game]);
     }
 
 }
