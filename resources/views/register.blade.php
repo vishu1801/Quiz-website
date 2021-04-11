@@ -106,7 +106,7 @@
 						</div>
 
 						<div class="text-center p-t-136">
-							<a class="txt2" href="index.html">
+							<a class="txt2" href="login">
 								Already have Account
 								<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 							</a>
